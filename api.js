@@ -12,17 +12,15 @@ fetch(`${pokemonURL}`, {
 .then(res => res.json())
 .then(function(data) {
     let image = data.sprites.front_default;
+    let name = data.species.name;
+    let id = data.id;
+    let types = data.types;
+    let height = (data.height * 0.0254).toFixed(1);
+    let weight = (data.weight * 0.45359237).toFixed(1);
     imageContainer.innerHTML = `<img src="${image}">`;
-    console.log(randomID);
-} );
-
-fetch(`https://pokeapi.co/api/v2/ability/${randomID}`, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json'
+    console.log(types[0].type.name);
+    if(types[1]){
+        console.log(types[1].type.name);
     }
-})
-.then(res => res.json())
-.then(function(data) {
     console.log(data);
 } );
