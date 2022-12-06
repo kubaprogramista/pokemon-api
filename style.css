@@ -50,6 +50,7 @@ main {
     position: relative;
     aspect-ratio: 16/20;
     height: 80vh;
+    border: 1px solid rgba(255,255,255, .2);
     border-radius: 20px;
     z-index: -3;
 }
@@ -120,4 +121,8 @@ main {
 
 .info-title {
     font-weight: bold;
+}
+
+.moves-list li {
+    list-style-type: none;
 }
