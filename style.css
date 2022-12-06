@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;700;800&display=swap');
+
 *, *::before, *::after {
     box-sizing: border-box;
+    font-family: 'Dosis', sans-serif;
 }
 
 * {
@@ -40,6 +43,60 @@ main {
     align-items: center;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(20,20,20);
+    position: relative;
+    aspect-ratio: 16/20;
+    height: 80vh;
+    border-radius: 20px;
+    z-index: -3;
+}
+
+.up {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 40%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+}
+
+.header p {
+    font-weight: bold;
+    font-size: 2rem;
+    color: whitesmoke;
+}
+
 img {
-    width: 200px;
+    width: 250px;
+}
+
+.down {
+    margin: 15px;
+    border-radius: 20px;
+    background-color: whitesmoke;
+    height: 60%;
+    z-index: -2;
+}
+
+.transparent {
+    position: absolute;
+    z-index: 0;
+    width: 550px;
+    height: 150px;
+    bottom: -65px;
+    right: 25px;
+    border-radius: 100%;
+    background-color: rgb(20,20,20);
+    z-index: -1;
 }
