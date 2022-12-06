@@ -77,16 +77,18 @@ main {
     color: whitesmoke;
 }
 
-img {
+.image img {
     width: 250px;
+    filter: drop-shadow(0px 0px 85px whitesmoke);
 }
 
 .down {
     margin: 15px;
     border-radius: 20px;
-    background-color: whitesmoke;
     height: 60%;
+    background-color: whitesmoke;
     z-index: -2;
+    display: flex;
 }
 
 .transparent {
@@ -96,7 +98,26 @@ img {
     height: 150px;
     bottom: -65px;
     right: 25px;
-    border-radius: 100%;
+    border-radius: 50%;
     background-color: rgb(20,20,20);
     z-index: -1;
+}
+
+.info-left, .info-right {
+    width: 50%;
+    height: calc(100% - 55px);
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-left *, .info-right *{
+    color: black;
+    font-size: 1.7rem;
+}
+
+.info-title {
+    font-weight: bold;
 }
