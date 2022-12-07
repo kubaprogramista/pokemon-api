@@ -31,6 +31,7 @@ input, textarea, button, select {
 
 body {
     background: rgb(47,47,47);
+    overflow-x: hidden;
     width: 100vw;
     height: 100vh;
 }
@@ -102,10 +103,33 @@ main {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    margin: 0 10px;
 }
 
 .pokemon {
     width: 200px;
     height: 250px;
-    border: 1px solid black;
+    border: 1px solid rgba(0,0,0,.5);
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pokemon:hover {
+    filter:saturate(50%);
+}
+
+.pokemon p {
+    font-size: 1.5rem;
+    text-shadow: 0px 0px 4px rgba(0,0,0,.8);
+}
+
+.pokemon img {
+    user-select: none;
+    aspect-ratio: 1/1;
+    width: 180px;
 }

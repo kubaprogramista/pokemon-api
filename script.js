@@ -23,61 +23,55 @@ const typeColors = {
 
 //total pokemons: 898
 //total images: 809
-let currentID = 1;
-const numberOfPokemons = 20;
+const numberOfPokemons = 100;
 
-let promises = [];
-
-for(let currentID = 1; currentID <= numberOfPokemons; currentID++){
-    promises.push(fetch(`https://pokeapi.co/api/v2/pokemon/${currentID}`))
-}
-Promise.all(promises)
-.then(function handleData(data) {
-    let countData = 0;
-    data.forEach(data => {
-        countData++
-        return fetch(`https://pokeapi.co/api/v2/pokemon/${countData}`)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error(response.statusText);
-            }
-        })
-        .then(data => {
-            console.log(data.id);
-            dataHandler(data);
-        })
+fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
+    .then(res => res.json())
+    .then(data => {
+        data.results.forEach(pokemon => {
+            fetchData(pokemon.url)
+        });
     })
-})
-    
-    .catch(function handleError(error) {
-        console.log("Error " + error);
-    });
 
-    // fetch(`https://pokeapi.co/api/v2/pokemon/${currentID}`, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // })
-    // .then(res => res.json())
-    // .then(data => {
-    //     console.log(data);
-    //     dataHandler(data);
-    // })
-
+function fetchData(url) {
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {
+        dataHandler(data)
+    })
+}
 
 function dataHandler(data) {
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
     let name = capitalizeFirstLetter(data.species.name);
+    let id = data.id;
+    if(id < 100) {
+        id = `0${id}`
+    } 
+    if(id < 10){
+        id = `0${id}`
+    }
+    if(id == 662){
+        id = "662r";
+    }
+    if(id == 740){
+        id = "740le";
+    }
+    let imageLink = `https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`;
+    let types = data.types;
+    let typeName = types[0].type.name;
+    let typeColor = typeColors[typeName]; 
+    
     const newPokemon = document.createElement("div");
     newPokemon.className = `pokemon ${data.id}`;
     newPokemon.innerHTML = `
-    <p>${name}</p>
     <p>${data.id}</p>
+    <p>${name}</p>
+    <img src="${imageLink}" alt="">
     `
+    newPokemon.style.background = `${typeColor}`;
     mainContainer.appendChild(newPokemon);
 }
