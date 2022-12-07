@@ -6,7 +6,7 @@ const typeContainer = document.querySelector(".types");
 
 //total pokemons: 898
 //total images: 809
-const randomID = Math.floor(Math.random() * 809);
+const randomID = Math.floor(Math.random() * 809 + 1);
 let pokemonURL = `https://pokeapi.co/api/v2/pokemon/${randomID}`
 
 fetch(`${pokemonURL}`, {
