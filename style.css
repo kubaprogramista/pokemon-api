@@ -119,6 +119,10 @@ main {
     font-size: 1.7rem;
 }
 
+.info-right {
+    justify-content: space-evenly;
+}
+
 .info-title {
     font-weight: bold;
 }
