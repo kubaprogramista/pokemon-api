@@ -99,4 +99,13 @@ header {
 main {
     width: 100%;
     height: calc(100% - 8vh);
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.pokemon {
+    width: 200px;
+    height: 250px;
+    border: 1px solid black;
 }
