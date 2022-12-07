@@ -80,6 +80,7 @@ fetch(`${pokemonURL}`, {
         let typeName = type.type.name;
         const newType = document.createElement("div");
         newType.className = `type`;
+        newType.style.background = `${typeColors[typeName]}`;
         newType.innerHTML = `${typeName}`;
         if(count == 2){
             contentContainer.style.background = `linear-gradient(90deg, ${typeColors[typeName]}, ${typeColor2})`;

@@ -170,6 +170,18 @@ main {
     font-weight: bold;
 }
 
+.type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 5px 8px 5px;
+    margin: 6px 0;
+    color: whitesmoke;
+    text-shadow: 0px 0px 4px black;
+    border-radius: 20px;
+    width: 50%;
+}
+
 .moves-list li {
     list-style-type: none;
 }
