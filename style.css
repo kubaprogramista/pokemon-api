@@ -48,7 +48,7 @@ main {
     flex-direction: column;
     background-color: rgb(20,20,20);
     position: relative;
-    aspect-ratio: 16/20;
+    aspect-ratio: 4/5;
     height: 80vh;
     border-radius: 20px;
     z-index: -3;
@@ -78,8 +78,15 @@ main {
     text-shadow: 0px 0px 4px black;
 }
 
+.image {
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .image img {
-    width: 250px;
+    height: 30vh;
     filter: drop-shadow(0px 0px 85px whitesmoke);
 }
 
@@ -95,8 +102,10 @@ main {
 .transparent {
     position: absolute;
     z-index: 0;
-    width: 550px;
-    height: 150px;
+    /* width: 550px;
+    height: 150px; */
+    width: 92%;
+    height: 50%;
     bottom: -65px;
     right: 25px;
     border-radius: 50%;
