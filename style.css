@@ -119,6 +119,42 @@ main {
     font-size: 1.7rem;
 }
 
+.about {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.about-title {
+    text-align: center;
+}
+
+.weight-wrapper, .height-wrapper {
+    display: flex;
+}
+
+.weight-image-wrapper, .height-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.weight-image-wrapper p, .height-image-wrapper p{
+    margin: -8px 0 0 0;
+    font-size: 1.2rem;
+}
+
+.weight-image-wrapper img, .height-image-wrapper img{
+    width: 40px;
+}
+
+.weight, .height {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 20px;
+}
+
 .info-right {
     padding: 0 0 0 50px;
 }
