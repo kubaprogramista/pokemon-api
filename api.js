@@ -5,6 +5,8 @@ const idContainer = document.querySelector(".pokemon-id");
 const imageContainer = document.querySelector(".image");
 const movesList = document.querySelector(".moves-list");
 const typeContainer = document.querySelector(".types");
+const weightContainer = document.querySelector(".weight");
+const heightContainer = document.querySelector(".height");
 
 const typeColors = {
 	normal: '#A8A77A',
@@ -59,13 +61,16 @@ fetch(`${pokemonURL}`, {
     }
     let imageLink = `https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`;
     let types = data.types;
-    let height = (data.height * 0.0254).toFixed(1);
     let weight = (data.weight * 0.45359237).toFixed(1);
+    let height = (data.height * 0.0254).toFixed(1);
     let abilities = data.abilities;
 
     nameContainer.innerHTML = `${name}`;
     idContainer.innerHTML = `#${id}`;
     imageContainer.innerHTML = `<img src="${imageLink}">`;
+
+    weightContainer.innerHTML = `${weight}`;
+    heightContainer.innerHTML = `${height}`;
 
     let count = 0;
     let typeColor2 = "";
