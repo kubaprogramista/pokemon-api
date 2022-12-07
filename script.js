@@ -33,7 +33,10 @@ for(let currentID = 1; currentID <= numberOfPokemons; currentID++){
 }
 Promise.all(promises)
 .then(function handleData(data) {
-    return fetch(`https://pokeapi.co/api/v2/pokemon/${currentID}`) // should be returned 1 time
+    let countData = 0;
+    data.forEach(data => {
+        countData++
+        return fetch(`https://pokeapi.co/api/v2/pokemon/${countData}`)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -46,6 +49,8 @@ Promise.all(promises)
             dataHandler(data);
         })
     })
+})
+    
     .catch(function handleError(error) {
         console.log("Error " + error);
     });
