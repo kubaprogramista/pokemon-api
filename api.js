@@ -99,6 +99,4 @@ fetch(`${pokemonURL}`, {
         newItem.innerHTML = `${ability.ability.name}`;
         movesList.appendChild(newItem);
     });
-
-    console.log(data);
 } );
