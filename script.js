@@ -34,18 +34,21 @@ for(let currentID = 1; currentID <= numberOfPokemons; currentID++){
 Promise.all(promises)
 .then(function handleData(data) {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${currentID}`) // should be returned 1 time
-      .then(response => {
-        if (response.ok) return response.json();
-        throw new Error(response.statusText);
-      })
-      .then(data => {
-        console.log(data);
-        dataHandler(data);
-      })
-  })
-  .catch(function handleError(error) {
-    console.log("Error " + error);
-  });
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(response.statusText);
+            }
+        })
+        .then(data => {
+            console.log(data.id);
+            dataHandler(data);
+        })
+    })
+    .catch(function handleError(error) {
+        console.log("Error " + error);
+    });
 
     // fetch(`https://pokeapi.co/api/v2/pokemon/${currentID}`, {
     //     method: 'GET',
