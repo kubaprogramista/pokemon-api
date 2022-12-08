@@ -72,6 +72,9 @@ function dataHandler(data) {
     <p>${name}</p>
     <img src="${imageLink}" alt="">
     `
+    newPokemon.addEventListener('click', (e) => {
+        mainContainer.style.filter = `opacity(0%)`;
+    })
     newPokemon.style.background = `${typeColor}`;
     mainContainer.appendChild(newPokemon);
 }
