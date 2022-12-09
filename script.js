@@ -72,7 +72,7 @@ function dataHandler(data) {
   const newPokemon = document.createElement("div");
   newPokemon.className = `pokemon ${data.id}`;
   newPokemon.innerHTML = `
-    <p>${data.id}</p>
+    <p>#${id}</p>
     <p>${name}</p>
     <img src="${imageLink}" alt="">
     `;
@@ -86,18 +86,7 @@ function dataHandler(data) {
       pokemonID = pokemonClassName[1];
     }
     pokemonWindowHandler(pokemonID);
-    gridContainer.style.filter = `opacity(0%)`;
-    setTimeout(() => {
-      gridContainer.style.transform = `scale(0%)`;
-    }, 300);
-    pokemonWindow.style.transform = `translateY(0px)`;
-    document.body.style.overflow = `hidden`;
-    searchContainer.style.transform = `scale(0%)`;
-    setTimeout(() => {
-      pokemonImage.style.transform = `translateY(0px)`;
-      goBackButton.style.transform = `translateY(0px)`;
-    }, 400);
-    window.scrollTo(0, 0);
+    pokemonWindowStyleHandler();
     document.querySelector("header").style.background = `${typeColor}`;
   });
   newPokemon.style.background = `${typeColor}`;
@@ -105,6 +94,25 @@ function dataHandler(data) {
 }
 
 goBackButton.addEventListener("click", () => {
+  mainPageStyleHandler();
+});
+
+function pokemonWindowStyleHandler() {
+  gridContainer.style.filter = `opacity(0%)`;
+  setTimeout(() => {
+    gridContainer.style.transform = `scale(0%)`;
+  }, 300);
+  pokemonWindow.style.transform = `translateY(0px)`;
+  document.body.style.overflow = `hidden`;
+  searchContainer.style.transform = `scale(0%)`;
+  setTimeout(() => {
+    pokemonImage.style.transform = `translateY(0px)`;
+    goBackButton.style.transform = `translateY(0px)`;
+  }, 400);
+  window.scrollTo(0, 0);
+}
+
+function mainPageStyleHandler() {
   document.querySelector("header").style.background = `transparent`;
   document.body.style.overflowY = `visible`;
   goBackButton.style.transform = `translateY(-100px)`;
@@ -117,4 +125,4 @@ goBackButton.addEventListener("click", () => {
   }, 400);
   pokemonWindow.style.transform = `translateY(-1000px)`;
   pokemonImage.style.transform = `translateY(-200px)`;
-});
+}
