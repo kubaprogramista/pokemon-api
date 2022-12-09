@@ -53,7 +53,7 @@ main {
 
 .pokemon-window {
   position: absolute;
-  top: 13vh;
+  top: 12vh;
   height: auto;
   width: auto;
   transform: translateY(-1000px);
