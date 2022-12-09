@@ -104,6 +104,7 @@ function dataHandler(data) {
 }
 
 goBackButton.addEventListener("click", () => {
+  document.body.style.overflowY = `visible`;
   goBackButton.style.transform = `translateY(-100px)`;
   setTimeout(() => {
     gridContainer.style.transform = `scale(100%)`;

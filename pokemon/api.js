@@ -64,43 +64,54 @@ function pokemonWindowHandler(pokemonID) {
       let imageLink = `https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`;
       let types = data.types;
       let weight = (data.weight * 0.45359237).toFixed(1);
-      let height = (data.height * 0.0254).toFixed(1);
+      let height = data.height.toFixed(1);
       let abilities = data.abilities;
 
       nameContainer.innerHTML = `${name}`;
       idContainer.innerHTML = `#${id}`;
       imageContainer.innerHTML = `<img src="${imageLink}">`;
 
-      weightContainer.innerHTML = `${weight}`;
-      heightContainer.innerHTML = `${height}`;
-
-      let count = 0;
-      let typeColor2 = "";
-
-      types.forEach((type) => {
-        count++;
-        let typeName = type.type.name;
-        const newType = document.createElement("div");
-        newType.className = `type`;
-        newType.style.background = `${typeColors[typeName]}`;
-        newType.style.boxShadow = `0px 0px 15px ${typeColors[typeName]}`;
-        newType.innerHTML = `${typeName}`;
-        if (count == 2) {
-          contentContainer.style.background = `linear-gradient(90deg, ${typeColors[typeName]}, ${typeColor2})`;
-          transparentContainer.style.background = `linear-gradient(90deg, ${typeColors[typeName]}, ${typeColor2})`;
-        } else {
-          contentContainer.style.background = `${typeColors[typeName]}`;
-          transparentContainer.style.background = `${typeColors[typeName]}`;
-        }
-        typeColor2 = typeColors[typeName];
-        typeContainer.appendChild(newType);
-      });
-
-      abilities.forEach((ability) => {
-        const newItem = document.createElement("li");
-        newItem.className = `ability`;
-        newItem.innerHTML = `${ability.ability.name}`;
-        movesList.appendChild(newItem);
-      });
+      renderProportions(weight, height);
+      renderTypes(types);
+      renderAbilites(abilities);
     });
+}
+
+function renderProportions(weight, height) {
+  weightContainer.innerHTML = `${weight}`;
+  heightContainer.innerHTML = `${height}`;
+}
+
+function renderTypes(types) {
+  typeContainer.innerHTML = "";
+  let count = 0;
+  let typeColor2 = "";
+  types.forEach((type) => {
+    count++;
+    let typeName = type.type.name;
+    const newType = document.createElement("div");
+    newType.className = `type`;
+    newType.style.background = `${typeColors[typeName]}`;
+    newType.style.boxShadow = `0px 0px 15px ${typeColors[typeName]}`;
+    newType.innerHTML = `${typeName}`;
+    if (count == 2) {
+      contentContainer.style.background = `linear-gradient(90deg, ${typeColors[typeName]}, ${typeColor2})`;
+      transparentContainer.style.background = `linear-gradient(90deg, ${typeColors[typeName]}, ${typeColor2})`;
+    } else {
+      contentContainer.style.background = `${typeColors[typeName]}`;
+      transparentContainer.style.background = `${typeColors[typeName]}`;
+    }
+    typeColor2 = typeColors[typeName];
+    typeContainer.appendChild(newType);
+  });
+}
+
+function renderAbilites(abilities) {
+  movesList.innerHTML = "";
+  abilities.forEach((ability) => {
+    const newItem = document.createElement("li");
+    newItem.className = `ability`;
+    newItem.innerHTML = `${ability.ability.name}`;
+    movesList.appendChild(newItem);
+  });
 }
