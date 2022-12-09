@@ -53,6 +53,7 @@ main {
 
 .pokemon-window {
   position: absolute;
+  top: 13vh;
   height: auto;
   width: auto;
   transform: translateY(-1000px);
@@ -99,6 +100,8 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: translateY(-200px);
+  transition: transform 0.3s ease-in-out;
 }
 
 .image img {

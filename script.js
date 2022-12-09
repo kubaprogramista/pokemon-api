@@ -1,5 +1,6 @@
 const gridContainer = document.querySelector(".grid-content");
 const pokemonWindow = document.querySelector(".pokemon-window");
+const pokemonImage = document.querySelector(".image");
 
 // const typeColors = {
 //   normal: "#A8A77A",
@@ -89,6 +90,9 @@ function dataHandler(data) {
     }, 1000);
     pokemonWindow.style.transform = `translateY(0px)`;
     document.body.style.overflow = `hidden`;
+    setTimeout(() => {
+      pokemonImage.style.transform = `translateY(0px)`;
+    }, 400);
     window.scrollTo(0, 0);
   });
   newPokemon.style.background = `${typeColor}`;

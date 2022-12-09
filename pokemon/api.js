@@ -31,7 +31,7 @@ const typeColors = {
 
 //total pokemons: 898
 //total images: 809
-const randomID = Math.floor(Math.random() * 809 + 1);
+// const randomID = Math.floor(Math.random() * 809 + 1);
 
 function pokemonWindowHandler(pokemonID) {
   let pokemonURL = `https://pokeapi.co/api/v2/pokemon/${pokemonID}`;
