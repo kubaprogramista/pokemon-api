@@ -51,6 +51,14 @@ main {
   align-items: center;
 }
 
+.pokemon-window {
+  position: absolute;
+  height: auto;
+  width: auto;
+  transform: translateY(-1000px);
+  transition: transform 0.3s ease-in-out;
+}
+
 .content {
   display: flex;
   flex-direction: column;

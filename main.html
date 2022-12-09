@@ -1,29 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="shortcut icon" href="png/pokeball.png" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="pokemon/style.css" />
+    <link rel="shortcut icon" href="png/pokeball.png" type="image/x-icon" />
     <title>Pokemon API</title>
     <script src="script.js" defer></script>
-</head>
-<body>
+    <script src="pokemon/api.js" defer></script>
+  </head>
+  <body>
     <header>
-        <div class="search-container">
-            <input type="text" placeholder="Search..." class="search">
-            <input type="image" src="png/search.png" alt="submit" class="search-icon">
-        </div>
-        <p class="header-title">
-            <!-- DELETE LINK -->
-            <span class="title-first-half">
-            <a href="pokemon/index.html">Poké
-            </span>dex</a>
-        </p>
+      <div class="search-container">
+        <input type="text" placeholder="Search..." class="search" />
+        <input
+          type="image"
+          src="png/search.png"
+          alt="submit"
+          class="search-icon"
+        />
+      </div>
+      <p class="header-title">
+        <!-- DELETE LINK -->
+        <span class="title-first-half">Poké</span>dex
+      </p>
     </header>
     <main>
-        <!-- content -->
+      <section class="pokemon-window">
+        <section class="content">
+          <section class="up">
+            <div class="header">
+              <p class="pokemon-name"></p>
+              <p class="pokemon-id"></p>
+              <div class="transparent"></div>
+            </div>
+            <div class="image"></div>
+          </section>
+          <section class="down">
+            <div class="info-left">
+              <div class="wrapper about">
+                <p class="info-title about-title">About</p>
+                <div class="weight-wrapper">
+                  <div class="weight-image-wrapper">
+                    <img src="pokemon/png/weight.png" alt="" />
+                    <p>Weight</p>
+                  </div>
+                  <div class="weight"></div>
+                </div>
+                <div class="height-wrapper">
+                  <div class="height-image-wrapper">
+                    <img src="pokemon/png/height.png" alt="" />
+                    <p>Height</p>
+                  </div>
+                  <div class="height"></div>
+                </div>
+              </div>
+            </div>
+            <div class="line"></div>
+            <div class="info-right">
+              <div class="wrapper-right">
+                <div class="wrapper">
+                  <p class="info-title">Type</p>
+                  <div class="types"></div>
+                </div>
+                <div class="wrapper">
+                  <p class="info-title">Abilities</p>
+                  <ul class="moves-list"></ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
+      <section class="grid-content"></section>
     </main>
-</body>
+  </body>
 </html>
