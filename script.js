@@ -98,12 +98,14 @@ function dataHandler(data) {
       goBackButton.style.transform = `translateY(0px)`;
     }, 400);
     window.scrollTo(0, 0);
+    document.querySelector("header").style.background = `${typeColor}`;
   });
   newPokemon.style.background = `${typeColor}`;
   gridContainer.appendChild(newPokemon);
 }
 
 goBackButton.addEventListener("click", () => {
+  document.querySelector("header").style.background = `transparent`;
   document.body.style.overflowY = `visible`;
   goBackButton.style.transform = `translateY(-100px)`;
   setTimeout(() => {
