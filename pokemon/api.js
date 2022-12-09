@@ -32,72 +32,75 @@ const typeColors = {
 //total pokemons: 898
 //total images: 809
 const randomID = Math.floor(Math.random() * 809 + 1);
-let pokemonURL = `https://pokeapi.co/api/v2/pokemon/${randomID}`;
 
-fetch(`${pokemonURL}`, {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-})
-  .then((res) => res.json())
-  .then(function (data) {
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-    let name = capitalizeFirstLetter(data.species.name);
-    let id = data.id;
-    if (id < 100) {
-      id = `0${id}`;
-    }
-    if (id < 10) {
-      id = `0${id}`;
-    }
-    if (id == 662) {
-      id = "662r";
-    }
-    if (id == 740) {
-      id = "740le";
-    }
-    let imageLink = `https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`;
-    let types = data.types;
-    let weight = (data.weight * 0.45359237).toFixed(1);
-    let height = (data.height * 0.0254).toFixed(1);
-    let abilities = data.abilities;
+function pokemonWindowHandler(pokemonID) {
+  let pokemonURL = `https://pokeapi.co/api/v2/pokemon/${pokemonID}`;
 
-    nameContainer.innerHTML = `${name}`;
-    idContainer.innerHTML = `#${id}`;
-    imageContainer.innerHTML = `<img src="${imageLink}">`;
-
-    weightContainer.innerHTML = `${weight}`;
-    heightContainer.innerHTML = `${height}`;
-
-    let count = 0;
-    let typeColor2 = "";
-
-    types.forEach((type) => {
-      count++;
-      let typeName = type.type.name;
-      const newType = document.createElement("div");
-      newType.className = `type`;
-      newType.style.background = `${typeColors[typeName]}`;
-      newType.style.boxShadow = `0px 0px 15px ${typeColors[typeName]}`;
-      newType.innerHTML = `${typeName}`;
-      if (count == 2) {
-        contentContainer.style.background = `linear-gradient(90deg, ${typeColors[typeName]}, ${typeColor2})`;
-        transparentContainer.style.background = `linear-gradient(90deg, ${typeColors[typeName]}, ${typeColor2})`;
-      } else {
-        contentContainer.style.background = `${typeColors[typeName]}`;
-        transparentContainer.style.background = `${typeColors[typeName]}`;
+  fetch(`${pokemonURL}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then(function (data) {
+      function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
       }
-      typeColor2 = typeColors[typeName];
-      typeContainer.appendChild(newType);
-    });
+      let name = capitalizeFirstLetter(data.species.name);
+      let id = data.id;
+      if (id < 100) {
+        id = `0${id}`;
+      }
+      if (id < 10) {
+        id = `0${id}`;
+      }
+      if (id == 662) {
+        id = "662r";
+      }
+      if (id == 740) {
+        id = "740le";
+      }
+      let imageLink = `https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`;
+      let types = data.types;
+      let weight = (data.weight * 0.45359237).toFixed(1);
+      let height = (data.height * 0.0254).toFixed(1);
+      let abilities = data.abilities;
 
-    abilities.forEach((ability) => {
-      const newItem = document.createElement("li");
-      newItem.className = `ability`;
-      newItem.innerHTML = `${ability.ability.name}`;
-      movesList.appendChild(newItem);
+      nameContainer.innerHTML = `${name}`;
+      idContainer.innerHTML = `#${id}`;
+      imageContainer.innerHTML = `<img src="${imageLink}">`;
+
+      weightContainer.innerHTML = `${weight}`;
+      heightContainer.innerHTML = `${height}`;
+
+      let count = 0;
+      let typeColor2 = "";
+
+      types.forEach((type) => {
+        count++;
+        let typeName = type.type.name;
+        const newType = document.createElement("div");
+        newType.className = `type`;
+        newType.style.background = `${typeColors[typeName]}`;
+        newType.style.boxShadow = `0px 0px 15px ${typeColors[typeName]}`;
+        newType.innerHTML = `${typeName}`;
+        if (count == 2) {
+          contentContainer.style.background = `linear-gradient(90deg, ${typeColors[typeName]}, ${typeColor2})`;
+          transparentContainer.style.background = `linear-gradient(90deg, ${typeColors[typeName]}, ${typeColor2})`;
+        } else {
+          contentContainer.style.background = `${typeColors[typeName]}`;
+          transparentContainer.style.background = `${typeColors[typeName]}`;
+        }
+        typeColor2 = typeColors[typeName];
+        typeContainer.appendChild(newType);
+      });
+
+      abilities.forEach((ability) => {
+        const newItem = document.createElement("li");
+        newItem.className = `ability`;
+        newItem.innerHTML = `${ability.ability.name}`;
+        movesList.appendChild(newItem);
+      });
     });
-  });
+}

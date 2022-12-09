@@ -74,12 +74,16 @@ function dataHandler(data) {
     <img src="${imageLink}" alt="">
     `;
   newPokemon.addEventListener("click", (e) => {
+    let pokemonClassName = e.path[1].className.split(" ");
+    let pokemonID = pokemonClassName[1];
+    pokemonWindowHandler(pokemonID);
     gridContainer.style.filter = `opacity(0%)`;
     setTimeout(() => {
       gridContainer.style.transform = `scale(0%)`;
     }, 1000);
     pokemonWindow.style.transform = `translateY(0px)`;
-    body.style.width = `auto`;
+    document.body.style.overflow = `hidden`;
+    window.scrollTo(0, 0);
   });
   newPokemon.style.background = `${typeColor}`;
   gridContainer.appendChild(newPokemon);
