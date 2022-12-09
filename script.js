@@ -1,6 +1,8 @@
 const gridContainer = document.querySelector(".grid-content");
 const pokemonWindow = document.querySelector(".pokemon-window");
 const pokemonImage = document.querySelector(".image");
+const goBackButton = document.querySelector(".go-back-button");
+const searchContainer = document.querySelector(".search-container");
 
 // const typeColors = {
 //   normal: "#A8A77A",
@@ -87,14 +89,28 @@ function dataHandler(data) {
     gridContainer.style.filter = `opacity(0%)`;
     setTimeout(() => {
       gridContainer.style.transform = `scale(0%)`;
-    }, 1000);
+    }, 300);
     pokemonWindow.style.transform = `translateY(0px)`;
     document.body.style.overflow = `hidden`;
+    searchContainer.style.transform = `scale(0%)`;
     setTimeout(() => {
       pokemonImage.style.transform = `translateY(0px)`;
+      goBackButton.style.transform = `translateY(0px)`;
     }, 400);
     window.scrollTo(0, 0);
   });
   newPokemon.style.background = `${typeColor}`;
   gridContainer.appendChild(newPokemon);
 }
+
+goBackButton.addEventListener("click", () => {
+  goBackButton.style.transform = `translateY(-100px)`;
+  setTimeout(() => {
+    gridContainer.style.transform = `scale(100%)`;
+    gridContainer.style.filter = `opacity(100%)`;
+  }, 300);
+  setTimeout(() => {
+    searchContainer.style.transform = `scale(100%)`;
+  }, 400);
+  pokemonWindow.style.transform = `translateY(-1000px)`;
+});
