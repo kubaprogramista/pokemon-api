@@ -103,7 +103,6 @@ function pokemonWindowStyleHandler() {
     gridContainer.style.transform = `scale(0%)`;
   }, 300);
   pokemonWindow.style.transform = `translateY(0px)`;
-  document.body.style.overflow = `hidden`;
   searchContainer.style.transform = `scale(0%)`;
   setTimeout(() => {
     pokemonImage.style.transform = `translateY(0px)`;
@@ -114,7 +113,7 @@ function pokemonWindowStyleHandler() {
 
 function mainPageStyleHandler() {
   document.querySelector("header").style.background = `transparent`;
-  document.body.style.overflowY = `visible`;
+  document.body.style.overflowY = `hidden`;
   goBackButton.style.transform = `translateY(-100px)`;
   setTimeout(() => {
     gridContainer.style.transform = `scale(100%)`;
@@ -126,3 +125,5 @@ function mainPageStyleHandler() {
   pokemonWindow.style.transform = `translateY(-1000px)`;
   pokemonImage.style.transform = `translateY(-200px)`;
 }
+
+window.onload = mainPageStyleHandler();

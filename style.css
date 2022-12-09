@@ -119,6 +119,7 @@ main {
 }
 
 .grid-content {
+  overflow-y: auto;
   width: 100%;
   height: calc(100% - 8vh);
   display: flex;
