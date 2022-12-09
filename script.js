@@ -116,4 +116,5 @@ goBackButton.addEventListener("click", () => {
     searchContainer.style.transform = `scale(100%)`;
   }, 400);
   pokemonWindow.style.transform = `translateY(-1000px)`;
+  pokemonImage.style.transform = `translateY(-200px)`;
 });
