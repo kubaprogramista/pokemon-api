@@ -13,18 +13,18 @@ searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
   gridContainer.innerHTML = "";
   let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
-  fetchAllPokemons(newURL);
+  fetchData(newURL);
   // currentDataHandler(inputData);
 });
 
-const numberOfPokemons = 20;
+const numberOfPokemons = 20; //151
 
 function fetchAllPokemons(newURL) {
   fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
     .then((res) => res.json())
     .then((data) => {
       data.results.forEach((pokemon) => {
-        fetchData(pokemon.url, newURL);
+        fetchData(pokemon.url);
       });
     });
 }
@@ -79,7 +79,7 @@ function renderPokemon(data, inputID) {
   let typeColor = typeColors[typeName];
 
   const newPokemon = document.createElement("div");
-  newPokemon.className = `pokemon ${id}`;
+  newPokemon.className = `pokemon ${data.id}`;
   newPokemon.innerHTML = `
     <p>#${id}</p>
     <p>${name}</p>
