@@ -4,61 +4,54 @@ const pokemonImage = document.querySelector(".image");
 const goBackButton = document.querySelector(".go-back-button");
 const searchContainer = document.querySelector(".search-container");
 const searchBarInput = document.querySelector(".search");
-
-// const typeColors = {
-//   normal: "#A8A77A",
-//   fire: "#EE8130",
-//   water: "#6390F0",
-//   electric: "#F7D02C",
-//   grass: "#7AC74C",
-//   ice: "#96D9D6",
-//   fighting: "#C22E28",
-//   poison: "#A33EA1",
-//   ground: "#E2BF65",
-//   flying: "#A98FF3",
-//   psychic: "#F95587",
-//   bug: "#A6B91A",
-//   rock: "#B6A136",
-//   ghost: "#735797",
-//   dragon: "#6F35FC",
-//   dark: "#705746",
-//   steel: "#B7B7CE",
-//   fairy: "#D685AD",
-// };
+// `https://pokeapi.co/api/v2/pokemon/2/`
 
 //total pokemons: 898
 //total images: 809
+
+searchBarInput.addEventListener("input", (e) => {
+  inputData = e.target.value;
+  gridContainer.innerHTML = "";
+  let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
+  fetchAllPokemons(newURL);
+  // currentDataHandler(inputData);
+});
+
 const numberOfPokemons = 20;
 
-fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
-  .then((res) => res.json())
-  .then((data) => {
-    data.results.forEach((pokemon) => {
-      fetchData(pokemon.url);
+function fetchAllPokemons(newURL) {
+  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
+    .then((res) => res.json())
+    .then((data) => {
+      data.results.forEach((pokemon) => {
+        fetchData(pokemon.url, newURL);
+      });
     });
-  });
+}
+
+window.onload = fetchAllPokemons();
 
 let currentData = [];
 let inputData = "";
+// let searchURL = `https://pokeapi.co/api/v2/pokemon/${id}/`;
 
-function fetchData(url) {
+function fetchData(url, newURL) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      currentData.push(data);
       gridContainer.innerHTML = "";
       currentDataHandler(inputData);
+      currentData.push(data);
     });
 }
 
 function currentDataHandler(id) {
   currentData.forEach((data) => {
-    renderPokemons(data, id);
+    renderPokemon(data, id);
   });
 }
 
-function renderPokemons(data, inputID) {
-  console.log(currentData);
+function renderPokemon(data, inputID) {
   let name = capitalizeFirstLetter(data.species.name);
   let id = 0;
 
@@ -86,7 +79,7 @@ function renderPokemons(data, inputID) {
   let typeColor = typeColors[typeName];
 
   const newPokemon = document.createElement("div");
-  newPokemon.className = `pokemon ${data.id}`;
+  newPokemon.className = `pokemon ${id}`;
   newPokemon.innerHTML = `
     <p>#${id}</p>
     <p>${name}</p>
@@ -151,10 +144,3 @@ function capitalizeFirstLetter(string) {
 }
 
 window.onload = mainPageStyleHandler();
-
-searchBarInput.addEventListener("input", (e) => {
-  inputData = e.target.value;
-  gridContainer.innerHTML = "";
-  currentDataHandler(inputData);
-  console.log(inputData);
-});
