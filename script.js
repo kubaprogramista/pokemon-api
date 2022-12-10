@@ -3,6 +3,7 @@ const pokemonWindow = document.querySelector(".pokemon-window");
 const pokemonImage = document.querySelector(".image");
 const goBackButton = document.querySelector(".go-back-button");
 const searchContainer = document.querySelector(".search-container");
+const searchBarInput = document.querySelector(".search");
 
 // const typeColors = {
 //   normal: "#A8A77A",
@@ -27,7 +28,7 @@ const searchContainer = document.querySelector(".search-container");
 
 //total pokemons: 898
 //total images: 809
-const numberOfPokemons = 100;
+const numberOfPokemons = 20;
 
 fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
   .then((res) => res.json())
@@ -37,21 +38,36 @@ fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
     });
   });
 
+let currentData = [];
+let inputData = "";
+
 function fetchData(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      dataHandler(data);
+      currentData.push(data);
+      gridContainer.innerHTML = "";
+      currentDataHandler(inputData);
     });
 }
 
-function dataHandler(data) {
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+function currentDataHandler(id) {
+  currentData.forEach((data) => {
+    renderPokemons(data, id);
+  });
+}
+
+function renderPokemons(data, inputID) {
+  console.log(currentData);
+  let name = capitalizeFirstLetter(data.species.name);
+  let id = 0;
+
+  if (inputID) {
+    id = inputID;
+  } else {
+    id = data.id;
   }
 
-  let name = capitalizeFirstLetter(data.species.name);
-  let id = data.id;
   if (id < 100) {
     id = `0${id}`;
   }
@@ -77,16 +93,7 @@ function dataHandler(data) {
     <img src="${imageLink}" alt="">
     `;
   newPokemon.addEventListener("click", (e) => {
-    let pokemonID = "";
-    let pokemonClassName = e.path[1].className.split(" ");
-    if (e.path[1].className === "grid-content") {
-      pokemonClassName = e.path[0].className.split(" ");
-      pokemonID = pokemonClassName[1];
-    } else {
-      pokemonID = pokemonClassName[1];
-    }
-    pokemonWindowHandler(pokemonID);
-    pokemonWindowStyleHandler();
+    chosenPokemonHandler(e);
     document.querySelector("header").style.background = `${typeColor}`;
   });
   newPokemon.style.background = `${typeColor}`;
@@ -96,6 +103,19 @@ function dataHandler(data) {
 goBackButton.addEventListener("click", () => {
   mainPageStyleHandler();
 });
+
+function chosenPokemonHandler(e) {
+  let pokemonID = "";
+  let pokemonClassName = e.path[1].className.split(" ");
+  if (e.path[1].className === "grid-content") {
+    pokemonClassName = e.path[0].className.split(" ");
+    pokemonID = pokemonClassName[1];
+  } else {
+    pokemonID = pokemonClassName[1];
+  }
+  pokemonWindowHandler(pokemonID);
+  pokemonWindowStyleHandler();
+}
 
 function pokemonWindowStyleHandler() {
   gridContainer.style.filter = `opacity(0%)`;
@@ -126,4 +146,15 @@ function mainPageStyleHandler() {
   pokemonImage.style.transform = `translateY(-200px)`;
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 window.onload = mainPageStyleHandler();
+
+searchBarInput.addEventListener("input", (e) => {
+  inputData = e.target.value;
+  gridContainer.innerHTML = "";
+  currentDataHandler(inputData);
+  console.log(inputData);
+});
