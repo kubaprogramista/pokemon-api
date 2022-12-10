@@ -13,7 +13,11 @@ searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
   gridContainer.innerHTML = "";
   let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
-  fetchData(newURL);
+  if (newURL != `https://pokeapi.co/api/v2/pokemon//`) {
+    fetchData(newURL);
+  } else {
+    fetchAllPokemons();
+  }
   // currentDataHandler(inputData);
 });
 
