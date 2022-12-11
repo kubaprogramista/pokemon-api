@@ -15,16 +15,27 @@ let count = 0;
 
 searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
-
-  let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
-  clearGridContent();
-  if (newURL != `https://pokeapi.co/api/v2/pokemon//`) {
-    currentData = [];
-    fetchData(newURL);
+  if (+inputData >= 0) {
+    let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
+    clearGridContent();
+    if (newURL != `https://pokeapi.co/api/v2/pokemon//`) {
+      currentData = [];
+      fetchData(newURL);
+    } else {
+      renderedPokemons = [];
+      fetchAllPokemons();
+    }
   } else {
-    fetchAllPokemons();
+    console.log(inputData);
+    const renderedDivs = document.querySelectorAll(`#pokemon`);
+    renderedDivs.forEach((div) => {
+      let renderedPokemonName = div.classList[1];
+      if (renderedPokemonName.includes(inputData.toLowerCase())) {
+        clearGridContent();
+        fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
+      }
+    });
   }
-  // currentDataHandler(inputData);
 });
 
 const numberOfPokemons = 20; //151
@@ -69,7 +80,9 @@ function renderPokemon(data, inputID) {
   let name = capitalizeFirstLetter(data.species.name);
   let id = 0;
 
-  if (inputID) {
+  if (!inputID) {
+    id = data.id;
+  } else if (+inputID >= 0) {
     id = inputID;
   } else {
     id = data.id;
@@ -93,7 +106,8 @@ function renderPokemon(data, inputID) {
   let typeColor = typeColors[typeName];
 
   const newPokemon = document.createElement("div");
-  newPokemon.className = `pokemon ${data.id}`;
+  newPokemon.id = `pokemon`;
+  newPokemon.className = ` ${data.id} ${name.toLowerCase()}`;
   newPokemon.innerHTML = `
     <p>#${id}</p>
     <p>${name}</p>
@@ -105,10 +119,10 @@ function renderPokemon(data, inputID) {
   });
   newPokemon.style.background = `${typeColor}`;
   renderedPokemons.push(newPokemon);
+
+  // console.log(renderedPokemons);
   gridContainer.appendChild(newPokemon);
 }
-
-function idHandler(id) {}
 
 goBackButton.addEventListener("click", () => {
   mainPageStyleHandler();
