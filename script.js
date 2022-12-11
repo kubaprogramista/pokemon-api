@@ -15,7 +15,21 @@ let count = 0;
 
 searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
+
   if (+inputData >= 0) {
+    //if input is number
+    const renderedDivs = document.querySelectorAll(`#pokemon`);
+    renderedDivs.forEach((div) => {
+      let renderedPokemonName = div.classList[0];
+      if (renderedPokemonName.includes(inputData)) {
+        clearGridContent();
+        fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
+      } else {
+        clearGridContent();
+        gridContainer.innerHTML = `Nothing found...`;
+      }
+    });
+
     let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
     clearGridContent();
     if (newURL != `https://pokeapi.co/api/v2/pokemon//`) {
@@ -26,13 +40,15 @@ searchBarInput.addEventListener("input", (e) => {
       fetchAllPokemons();
     }
   } else {
-    console.log(inputData);
     const renderedDivs = document.querySelectorAll(`#pokemon`);
     renderedDivs.forEach((div) => {
       let renderedPokemonName = div.classList[1];
       if (renderedPokemonName.includes(inputData.toLowerCase())) {
         clearGridContent();
         fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
+      } else {
+        clearGridContent();
+        gridContainer.innerHTML = `Nothing found...`;
       }
     });
   }
