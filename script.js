@@ -5,6 +5,8 @@ const goBackButton = document.querySelector(".go-back-button");
 const searchContainer = document.querySelector(".search-container");
 const searchBarInput = document.querySelector(".search");
 
+let currentData = [];
+let inputData = "";
 // `https://pokeapi.co/api/v2/pokemon/2/`
 
 //total pokemons: 898
@@ -12,8 +14,10 @@ const searchBarInput = document.querySelector(".search");
 
 searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
+
   let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
   if (newURL != `https://pokeapi.co/api/v2/pokemon//`) {
+    currentData = [];
     fetchData(newURL);
   } else {
     fetchAllPokemons();
@@ -23,7 +27,7 @@ searchBarInput.addEventListener("input", (e) => {
 
 const numberOfPokemons = 20; //151
 
-function fetchAllPokemons(newURL) {
+function fetchAllPokemons() {
   fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
     .then((res) => res.json())
     .then((data) => {
@@ -33,16 +37,14 @@ function fetchAllPokemons(newURL) {
     });
 }
 
-let currentData = [];
-let inputData = "";
 // let searchURL = `https://pokeapi.co/api/v2/pokemon/${id}/`;
 
-function fetchData(url, newURL) {
+function fetchData(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      gridContainer.innerHTML = "";
       currentData.push(data);
+
       currentDataHandler(inputData);
     });
 }
@@ -52,10 +54,13 @@ function clearGridContent() {
 }
 
 function currentDataHandler(id) {
+  clearGridContent();
   currentData.forEach((data) => {
     renderPokemon(data, id);
   });
 }
+
+let renderedPokemons = [];
 
 function renderPokemon(data, inputID) {
   let name = capitalizeFirstLetter(data.species.name);
@@ -96,8 +101,11 @@ function renderPokemon(data, inputID) {
     document.querySelector("header").style.background = `${typeColor}`;
   });
   newPokemon.style.background = `${typeColor}`;
+  renderedPokemons.push(newPokemon);
   gridContainer.appendChild(newPokemon);
 }
+
+function idHandler(id) {}
 
 goBackButton.addEventListener("click", () => {
   mainPageStyleHandler();
