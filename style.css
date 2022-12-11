@@ -160,3 +160,13 @@ main {
   aspect-ratio: 1/1;
   width: 180px;
 }
+
+.nothing-found {
+  display: none;
+  font-size: 3rem;
+  position: absolute;
+}
+
+.nothing-found.active {
+  display: block;
+}

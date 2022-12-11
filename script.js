@@ -4,19 +4,23 @@ const pokemonImage = document.querySelector(".image");
 const goBackButton = document.querySelector(".go-back-button");
 const searchContainer = document.querySelector(".search-container");
 const searchBarInput = document.querySelector(".search");
+const nothingFound = document.querySelector(".nothing-found");
 
-let currentData = [];
 let inputData = "";
-let count = 0;
-// `https://pokeapi.co/api/v2/pokemon/2/`
+const numberOfPokemons = 20;
 
 //total pokemons: 898
 //total images: 809
+let count = 0;
+//first gen: 151
 
 searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
-
-  if (+inputData >= 0) {
+  if (inputData == "") {
+    renderedPokemons = [];
+    clearGridContent();
+    fetchAllPokemons();
+  } else if (+inputData >= 0) {
     //if input is number
     const renderedDivs = document.querySelectorAll(`#pokemon`);
     renderedDivs.forEach((div) => {
@@ -24,37 +28,37 @@ searchBarInput.addEventListener("input", (e) => {
       if (renderedPokemonName.includes(inputData)) {
         clearGridContent();
         fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
-      } else {
-        clearGridContent();
-        gridContainer.innerHTML = `Nothing found...`;
       }
     });
 
     let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
     clearGridContent();
     if (newURL != `https://pokeapi.co/api/v2/pokemon//`) {
-      currentData = [];
       fetchData(newURL);
     } else {
       renderedPokemons = [];
       fetchAllPokemons();
     }
   } else {
+    //if input is string
+    count = 0;
     const renderedDivs = document.querySelectorAll(`#pokemon`);
     renderedDivs.forEach((div) => {
       let renderedPokemonName = div.classList[1];
       if (renderedPokemonName.includes(inputData.toLowerCase())) {
+        nothingFound.classList.remove("active");
         clearGridContent();
+        ++count;
+        if (count === numberOfPokemons) {
+          nothingFound.classList.add("active");
+        }
         fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
       } else {
         clearGridContent();
-        gridContainer.innerHTML = `Nothing found...`;
       }
     });
   }
 });
-
-const numberOfPokemons = 20; //151
 
 function fetchAllPokemons() {
   fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
@@ -66,29 +70,17 @@ function fetchAllPokemons() {
     });
 }
 
-// let searchURL = `https://pokeapi.co/api/v2/pokemon/${id}/`;
-let i = 0;
 function fetchData(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      currentData.push(data);
-      // currentDataHandler(inputData);
       renderPokemon(data, inputData);
-      i++;
     });
 }
 
 function clearGridContent() {
   gridContainer.innerHTML = "";
 }
-
-// function currentDataHandler(id) {
-//   clearGridContent();
-//   currentData.forEach((data) => {
-//     renderPokemon(data, id);
-//   });
-// }
 
 let renderedPokemons = [];
 
