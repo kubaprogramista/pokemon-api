@@ -4,6 +4,7 @@ const pokemonImage = document.querySelector(".image");
 const goBackButton = document.querySelector(".go-back-button");
 const searchContainer = document.querySelector(".search-container");
 const searchBarInput = document.querySelector(".search");
+
 // `https://pokeapi.co/api/v2/pokemon/2/`
 
 //total pokemons: 898
@@ -11,7 +12,6 @@ const searchBarInput = document.querySelector(".search");
 
 searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
-  gridContainer.innerHTML = "";
   let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
   if (newURL != `https://pokeapi.co/api/v2/pokemon//`) {
     fetchData(newURL);
@@ -42,9 +42,13 @@ function fetchData(url, newURL) {
     .then((res) => res.json())
     .then((data) => {
       gridContainer.innerHTML = "";
-      currentDataHandler(inputData);
       currentData.push(data);
+      currentDataHandler(inputData);
     });
+}
+
+function clearGridContent() {
+  gridContainer.innerHTML = "";
 }
 
 function currentDataHandler(id) {
@@ -99,51 +103,4 @@ goBackButton.addEventListener("click", () => {
   mainPageStyleHandler();
 });
 
-function chosenPokemonHandler(e) {
-  let pokemonID = "";
-  let pokemonClassName = e.path[1].className.split(" ");
-  if (e.path[1].className === "grid-content") {
-    pokemonClassName = e.path[0].className.split(" ");
-    pokemonID = pokemonClassName[1];
-  } else {
-    pokemonID = pokemonClassName[1];
-  }
-  pokemonWindowHandler(pokemonID);
-  pokemonWindowStyleHandler();
-}
-
-function pokemonWindowStyleHandler() {
-  gridContainer.style.filter = `opacity(0%)`;
-  setTimeout(() => {
-    gridContainer.style.transform = `scale(0%)`;
-  }, 300);
-  pokemonWindow.style.transform = `translateY(0px)`;
-  searchContainer.style.transform = `scale(0%)`;
-  setTimeout(() => {
-    pokemonImage.style.transform = `translateY(0px)`;
-    goBackButton.style.transform = `translateY(0px)`;
-  }, 400);
-  window.scrollTo(0, 0);
-}
-
-function mainPageStyleHandler() {
-  document.querySelector("header").style.background = `transparent`;
-  document.body.style.overflowY = `hidden`;
-  goBackButton.style.transform = `translateY(-100px)`;
-  setTimeout(() => {
-    gridContainer.style.transform = `scale(100%)`;
-    gridContainer.style.filter = `opacity(100%)`;
-  }, 300);
-  setTimeout(() => {
-    searchContainer.style.transform = `scale(100%)`;
-  }, 400);
-  pokemonWindow.style.transform = `translateY(-1000px)`;
-  pokemonImage.style.transform = `translateY(-200px)`;
-}
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-window.onload = mainPageStyleHandler();
 window.onload = fetchAllPokemons();
