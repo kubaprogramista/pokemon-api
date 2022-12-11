@@ -33,8 +33,6 @@ function fetchAllPokemons(newURL) {
     });
 }
 
-window.onload = fetchAllPokemons();
-
 let currentData = [];
 let inputData = "";
 // let searchURL = `https://pokeapi.co/api/v2/pokemon/${id}/`;
@@ -148,3 +146,4 @@ function capitalizeFirstLetter(string) {
 }
 
 window.onload = mainPageStyleHandler();
+window.onload = fetchAllPokemons();
