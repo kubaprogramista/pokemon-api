@@ -7,6 +7,7 @@ const searchBarInput = document.querySelector(".search");
 
 let currentData = [];
 let inputData = "";
+let count = 0;
 // `https://pokeapi.co/api/v2/pokemon/2/`
 
 //total pokemons: 898
@@ -16,6 +17,7 @@ searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
 
   let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
+  clearGridContent();
   if (newURL != `https://pokeapi.co/api/v2/pokemon//`) {
     currentData = [];
     fetchData(newURL);
@@ -38,14 +40,15 @@ function fetchAllPokemons() {
 }
 
 // let searchURL = `https://pokeapi.co/api/v2/pokemon/${id}/`;
-
+let i = 0;
 function fetchData(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
       currentData.push(data);
-
-      currentDataHandler(inputData);
+      // currentDataHandler(inputData);
+      renderPokemon(data, inputData);
+      i++;
     });
 }
 
@@ -53,12 +56,12 @@ function clearGridContent() {
   gridContainer.innerHTML = "";
 }
 
-function currentDataHandler(id) {
-  clearGridContent();
-  currentData.forEach((data) => {
-    renderPokemon(data, id);
-  });
-}
+// function currentDataHandler(id) {
+//   clearGridContent();
+//   currentData.forEach((data) => {
+//     renderPokemon(data, id);
+//   });
+// }
 
 let renderedPokemons = [];
 
