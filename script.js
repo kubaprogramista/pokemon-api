@@ -16,6 +16,10 @@ let count = 0;
 
 searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
+  searchHandler();
+});
+
+function searchHandler() {
   if (inputData == "") {
     //if input is empty
     clearGridContent();
@@ -30,6 +34,7 @@ searchBarInput.addEventListener("input", (e) => {
         nothingFound.classList.remove("active");
         clearGridContent();
         ++count;
+        console.log(count);
         if (count === numberOfPokemons) {
           nothingFound.classList.add("active");
         }
@@ -46,6 +51,7 @@ searchBarInput.addEventListener("input", (e) => {
         nothingFound.classList.remove("active");
         clearGridContent();
         ++count;
+        console.log(count);
         if (count === numberOfPokemons) {
           nothingFound.classList.add("active");
         }
@@ -55,7 +61,7 @@ searchBarInput.addEventListener("input", (e) => {
       }
     });
   }
-});
+}
 
 function fetchAllPokemons() {
   fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
@@ -97,7 +103,10 @@ function renderPokemon(data) {
   if (id == 740) {
     id = "740le";
   }
-  let imageLink = `https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png`;
+
+  //BACKUP PHOTO: https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png
+
+  let imageLink = `https://pokedex.hybridshivam.com/assets/thumbnails-compressed/${id}.png`;
   let types = data.types;
   let typeName = types[0].type.name;
   let typeColor = typeColors[typeName];
