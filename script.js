@@ -10,7 +10,7 @@ let inputData = "";
 //total pokemons: 898
 //total images: 809
 
-const numberOfPokemons = 809;
+const numberOfPokemons = 151;
 
 searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
