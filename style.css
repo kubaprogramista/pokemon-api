@@ -45,6 +45,7 @@ body {
 }
 
 header {
+  background-color: rgba(47, 47, 47);
   position: relative;
   height: 7vh;
   width: 100vw;
