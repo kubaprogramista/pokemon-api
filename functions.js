@@ -31,7 +31,6 @@ function searchHandler() {
         nothingFound.classList.remove("active");
         clearGridContent();
         ++count;
-        console.log(count);
         if (count === numberOfPokemons) {
           nothingFound.classList.add("active");
         }
@@ -48,7 +47,6 @@ function searchHandler() {
         nothingFound.classList.remove("active");
         clearGridContent();
         ++count;
-        console.log(count);
         if (count === numberOfPokemons) {
           nothingFound.classList.add("active");
         }
