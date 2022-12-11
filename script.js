@@ -7,7 +7,7 @@ const searchBarInput = document.querySelector(".search");
 const nothingFound = document.querySelector(".nothing-found");
 
 let inputData = "";
-const numberOfPokemons = 151;
+const numberOfPokemons = 898;
 
 //total pokemons: 898
 //total images: 809
