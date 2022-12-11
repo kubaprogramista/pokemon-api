@@ -1,3 +1,69 @@
+function fetchAllPokemons() {
+  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
+    .then((res) => res.json())
+    .then((data) => {
+      data.results.forEach((pokemon) => {
+        fetchData(pokemon.url);
+      });
+    });
+}
+
+function fetchData(url) {
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      renderPokemon(data);
+    });
+}
+
+function searchHandler() {
+  if (inputData == "") {
+    //if input is empty
+    clearGridContent();
+    fetchAllPokemons();
+  } else if (+inputData >= 0) {
+    //if input is number
+    let count = 0;
+    const renderedDivs = document.querySelectorAll(`#pokemon`);
+    renderedDivs.forEach((div) => {
+      let renderedPokemonName = div.classList[0];
+      if (renderedPokemonName.includes(inputData)) {
+        nothingFound.classList.remove("active");
+        clearGridContent();
+        ++count;
+        console.log(count);
+        if (count === numberOfPokemons) {
+          nothingFound.classList.add("active");
+        }
+        fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
+      }
+    });
+  } else {
+    //if input is string
+    let count = 0;
+    const renderedDivs = document.querySelectorAll(`#pokemon`);
+    renderedDivs.forEach((div) => {
+      let renderedPokemonName = div.classList[1];
+      if (renderedPokemonName.includes(inputData.toLowerCase())) {
+        nothingFound.classList.remove("active");
+        clearGridContent();
+        ++count;
+        console.log(count);
+        if (count === numberOfPokemons) {
+          nothingFound.classList.add("active");
+        }
+        fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
+      } else {
+        clearGridContent();
+      }
+    });
+  }
+}
+
+function clearGridContent() {
+  gridContainer.innerHTML = "";
+}
+
 function mainPageStyleHandler() {
   document.querySelector("header").style.background = `transparent`;
   document.body.style.overflowY = `hidden`;
@@ -45,3 +111,4 @@ function capitalizeFirstLetter(string) {
 }
 
 window.onload = mainPageStyleHandler();
+window.onload = fetchAllPokemons();

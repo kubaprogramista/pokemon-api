@@ -29,10 +29,6 @@ const typeColors = {
   fairy: "#D685AD",
 };
 
-//total pokemons: 898
-//total images: 809
-// const randomID = Math.floor(Math.random() * 809 + 1);
-
 function pokemonWindowHandler(pokemonID) {
   let pokemonURL = `https://pokeapi.co/api/v2/pokemon/${pokemonID}`;
 
@@ -44,9 +40,6 @@ function pokemonWindowHandler(pokemonID) {
   })
     .then((res) => res.json())
     .then(function (data) {
-      function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-      }
       let name = capitalizeFirstLetter(data.species.name);
       let id = data.id;
       if (id < 100) {

@@ -5,85 +5,17 @@ const goBackButton = document.querySelector(".go-back-button");
 const searchContainer = document.querySelector(".search-container");
 const searchBarInput = document.querySelector(".search");
 const nothingFound = document.querySelector(".nothing-found");
-
 let inputData = "";
-const numberOfPokemons = 898;
 
 //total pokemons: 898
 //total images: 809
-let count = 0;
-//first gen: 151
+
+const numberOfPokemons = 809;
 
 searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
   searchHandler();
 });
-
-function searchHandler() {
-  if (inputData == "") {
-    //if input is empty
-    clearGridContent();
-    fetchAllPokemons();
-  } else if (+inputData >= 0) {
-    //if input is number
-    count = 0;
-    const renderedDivs = document.querySelectorAll(`#pokemon`);
-    renderedDivs.forEach((div) => {
-      let renderedPokemonName = div.classList[0];
-      if (renderedPokemonName.includes(inputData)) {
-        nothingFound.classList.remove("active");
-        clearGridContent();
-        ++count;
-        console.log(count);
-        if (count === numberOfPokemons) {
-          nothingFound.classList.add("active");
-        }
-        fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
-      }
-    });
-  } else {
-    //if input is string
-    count = 0;
-    const renderedDivs = document.querySelectorAll(`#pokemon`);
-    renderedDivs.forEach((div) => {
-      let renderedPokemonName = div.classList[1];
-      if (renderedPokemonName.includes(inputData.toLowerCase())) {
-        nothingFound.classList.remove("active");
-        clearGridContent();
-        ++count;
-        console.log(count);
-        if (count === numberOfPokemons) {
-          nothingFound.classList.add("active");
-        }
-        fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
-      } else {
-        clearGridContent();
-      }
-    });
-  }
-}
-
-function fetchAllPokemons() {
-  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${numberOfPokemons}`)
-    .then((res) => res.json())
-    .then((data) => {
-      data.results.forEach((pokemon) => {
-        fetchData(pokemon.url);
-      });
-    });
-}
-
-function fetchData(url) {
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      renderPokemon(data);
-    });
-}
-
-function clearGridContent() {
-  gridContainer.innerHTML = "";
-}
 
 function renderPokemon(data) {
   let name = capitalizeFirstLetter(data.species.name);
@@ -97,14 +29,8 @@ function renderPokemon(data) {
   if (id < 10) {
     id = `0${id}`;
   }
-  if (id == 662) {
-    id = "662r";
-  }
-  if (id == 740) {
-    id = "740le";
-  }
 
-  //BACKUP PHOTO: https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png
+  //BACKUP IMAGES: https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png
 
   let imageLink = `https://pokedex.hybridshivam.com/assets/thumbnails-compressed/${id}.png`;
   let types = data.types;
@@ -130,5 +56,3 @@ function renderPokemon(data) {
 goBackButton.addEventListener("click", () => {
   mainPageStyleHandler();
 });
-
-window.onload = fetchAllPokemons();
