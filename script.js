@@ -7,7 +7,7 @@ const searchBarInput = document.querySelector(".search");
 const nothingFound = document.querySelector(".nothing-found");
 
 let inputData = "";
-const numberOfPokemons = 20;
+const numberOfPokemons = 151;
 
 //total pokemons: 898
 //total images: 809
@@ -17,28 +17,25 @@ let count = 0;
 searchBarInput.addEventListener("input", (e) => {
   inputData = e.target.value;
   if (inputData == "") {
-    renderedPokemons = [];
+    //if input is empty
     clearGridContent();
     fetchAllPokemons();
   } else if (+inputData >= 0) {
     //if input is number
+    count = 0;
     const renderedDivs = document.querySelectorAll(`#pokemon`);
     renderedDivs.forEach((div) => {
       let renderedPokemonName = div.classList[0];
       if (renderedPokemonName.includes(inputData)) {
+        nothingFound.classList.remove("active");
         clearGridContent();
+        ++count;
+        if (count === numberOfPokemons) {
+          nothingFound.classList.add("active");
+        }
         fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
       }
     });
-
-    let newURL = `https://pokeapi.co/api/v2/pokemon/${inputData}/`;
-    clearGridContent();
-    if (newURL != `https://pokeapi.co/api/v2/pokemon//`) {
-      fetchData(newURL);
-    } else {
-      renderedPokemons = [];
-      fetchAllPokemons();
-    }
   } else {
     //if input is string
     count = 0;
@@ -74,7 +71,7 @@ function fetchData(url) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
-      renderPokemon(data, inputData);
+      renderPokemon(data);
     });
 }
 
@@ -82,19 +79,11 @@ function clearGridContent() {
   gridContainer.innerHTML = "";
 }
 
-let renderedPokemons = [];
-
-function renderPokemon(data, inputID) {
+function renderPokemon(data) {
   let name = capitalizeFirstLetter(data.species.name);
   let id = 0;
 
-  if (!inputID) {
-    id = data.id;
-  } else if (+inputID >= 0) {
-    id = inputID;
-  } else {
-    id = data.id;
-  }
+  id = data.id;
 
   if (id < 100) {
     id = `0${id}`;
@@ -126,9 +115,6 @@ function renderPokemon(data, inputID) {
     document.querySelector("header").style.background = `${typeColor}`;
   });
   newPokemon.style.background = `${typeColor}`;
-  renderedPokemons.push(newPokemon);
-
-  // console.log(renderedPokemons);
   gridContainer.appendChild(newPokemon);
 }
 

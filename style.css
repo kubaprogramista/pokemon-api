@@ -94,13 +94,6 @@ header {
   outline: 1px solid rgba(0, 0, 0, 0.7);
 }
 
-.search-icon {
-  width: 25px;
-  position: absolute;
-  right: 10px;
-  top: 7.5px;
-}
-
 .header-title {
   cursor: default;
   text-align: center;
@@ -140,10 +133,12 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 #pokemon:hover {
   filter: saturate(50%);
+  transform: scale(101.5%);
 }
 
 #pokemon * {
