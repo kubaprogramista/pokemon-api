@@ -76,8 +76,6 @@ main {
 .transparent {
   position: absolute;
   z-index: 0;
-  /* width: 550px;
-    height: 150px; */
   width: 92%;
   height: 50%;
   bottom: -65px;
@@ -182,4 +180,19 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 800px) {
+  .content {
+    margin: 0;
+    width: 95vw;
+  }
+
+  .content * {
+    font-size: 1.2rem;
+  }
+
+  .type {
+    padding: 5px 35px 8px 35px;
+  }
 }

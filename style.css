@@ -54,6 +54,8 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 50px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+  z-index: 1;
   transition: background 0.3s ease-in-out;
 }
 
@@ -192,4 +194,29 @@ main {
 
 .nothing-found.active {
   display: block;
+}
+
+@media only screen and (max-width: 800px) {
+  header {
+    justify-content: flex-start;
+  }
+
+  .grid-content {
+    justify-content: center;
+  }
+
+  #pokemon {
+    width: 150px;
+    height: 200px;
+  }
+
+  .grid-pokemon-type {
+    width: 20px;
+    height: 20px;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .header-title {
+    font-size: 1.7rem;
+  }
 }
