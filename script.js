@@ -1,4 +1,3 @@
-const allContent = document.querySelector("body");
 const gridContainer = document.querySelector(".grid-content");
 const pokemonWindow = document.querySelector(".pokemon-window");
 const pokemonImage = document.querySelector(".image");
@@ -6,8 +5,6 @@ const goBackButton = document.querySelector(".go-back-button");
 const searchContainer = document.querySelector(".search-container");
 const searchBarInput = document.querySelector(".search");
 const nothingFound = document.querySelector(".nothing-found");
-
-allContent.style.filter = "opacity(0%)";
 
 let inputData = "";
 //total pokemons: 898
@@ -55,7 +52,6 @@ function renderPokemon(data) {
   gridContainer.appendChild(newPokemon);
   if (count === numberOfPokemons) {
     isLoaded = true;
-    allContent.style.filter = "opacity(100%)";
   }
 }
 
