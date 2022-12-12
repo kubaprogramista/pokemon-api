@@ -16,45 +16,27 @@ function fetchData(url) {
     });
 }
 
-function searchHandler() {
-  if (inputData == "") {
-    //if input is empty
-    clearGridContent();
-    fetchAllPokemons();
-  } else if (+inputData >= 0) {
-    //if input is number
-    let count = 0;
-    const renderedDivs = document.querySelectorAll(`#pokemon`);
-    renderedDivs.forEach((div) => {
-      let renderedPokemonName = div.classList[0];
-      if (renderedPokemonName.includes(inputData)) {
-        nothingFound.classList.remove("active");
-        clearGridContent();
-        ++count;
-        if (count === numberOfPokemons) {
-          nothingFound.classList.add("active");
-        }
-        fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
-      }
-    });
-  } else {
-    //if input is string
-    let count = 0;
-    const renderedDivs = document.querySelectorAll(`#pokemon`);
-    renderedDivs.forEach((div) => {
-      let renderedPokemonName = div.classList[1];
-      if (renderedPokemonName.includes(inputData.toLowerCase())) {
-        nothingFound.classList.remove("active");
-        clearGridContent();
-        ++count;
-        if (count === numberOfPokemons) {
-          nothingFound.classList.add("active");
-        }
-        fetchData(`https://pokeapi.co/api/v2/pokemon/${renderedPokemonName}/`);
+function searchHandler(divs) {
+  let renderedDivs = [...divs];
+  const found = renderedDivs.filter((div) => {
+    if (div.className.includes(inputData)) {
+      console.log(inputData);
+      let divID = div.classList[0];
+      let divName = div.classList[1];
+      clearGridContent();
+      if (+inputData >= 0) {
+        fetchData(`https://pokeapi.co/api/v2/pokemon/${divID}/`);
       } else {
-        clearGridContent();
+        fetchData(`https://pokeapi.co/api/v2/pokemon/${divName}/`);
       }
-    });
+      return divName;
+    }
+  });
+  if (found.length === 0) {
+    clearGridContent();
+    nothingFound.classList.add("active");
+  } else {
+    nothingFound.classList.remove("active");
   }
 }
 
