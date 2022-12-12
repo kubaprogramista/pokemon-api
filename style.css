@@ -97,6 +97,7 @@ header {
 }
 
 .header-title {
+  font-weight: 600;
   cursor: default;
   text-align: center;
   font-size: 4rem;
