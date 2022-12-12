@@ -58,7 +58,6 @@ header {
 }
 
 .go-back-button {
-  padding: 0 0 10px 0;
   position: absolute;
   cursor: pointer;
   width: 50px;
