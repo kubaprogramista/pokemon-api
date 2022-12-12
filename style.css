@@ -138,11 +138,10 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: filter 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
 }
 
 #pokemon:hover {
-  filter: saturate(50%);
   transform: scale(101.5%);
 }
 
