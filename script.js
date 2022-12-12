@@ -47,7 +47,8 @@ function renderPokemon(data) {
     chosenPokemonHandler(e);
     document.querySelector("header").style.background = `${typeColor}`;
   });
-  newPokemon.style.background = `${typeColor}`;
+  renderGridPokemonTypes(data.types, newPokemon);
+
   gridContainer.appendChild(newPokemon);
   if (currentDivs.length + 1 <= numberOfPokemons) {
     currentDivs.push(newPokemon);
@@ -55,6 +56,26 @@ function renderPokemon(data) {
   if (count === numberOfPokemons) {
     isLoaded = true;
   }
+}
+
+function renderGridPokemonTypes(types, container) {
+  let count = 0;
+  let typeColor2 = "";
+  const gridTypeContainer = document.createElement("div");
+  gridTypeContainer.className = `grid-pokemon-type-container`;
+  types.forEach((type) => {
+    count++;
+    let typeName = type.type.name;
+    const newTypeBall = document.createElement("div");
+    newTypeBall.className = `grid-pokemon-type`;
+    newTypeBall.innerHTML = `<img src="png/type-icons/${type.type.name}.png" alt="">`;
+    newTypeBall.style.background = `${typeColors[typeName]}`;
+    newTypeBall.style.boxShadow = `0px 0px 15px ${typeColors[typeName]}`;
+
+    typeColor2 = typeColors[typeName];
+    gridTypeContainer.appendChild(newTypeBall);
+  });
+  container.appendChild(gridTypeContainer);
 }
 
 searchBarInput.addEventListener("input", (e) => {
