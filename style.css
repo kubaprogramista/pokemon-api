@@ -158,6 +158,7 @@ main {
 }
 
 .nothing-found {
+  top: 20vh;
   display: none;
   font-size: 3rem;
   position: absolute;
