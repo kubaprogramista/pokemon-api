@@ -17,10 +17,9 @@ function fetchData(url) {
 }
 
 function searchHandler(divs) {
-  let renderedDivs = [...divs];
-  const found = renderedDivs.filter((div) => {
+  const found = divs.filter((div) => {
     if (div.className.includes(inputData)) {
-      console.log(inputData);
+      // console.log(inputData);
       let divID = div.classList[0];
       let divName = div.classList[1];
       clearGridContent();
@@ -32,6 +31,7 @@ function searchHandler(divs) {
       return divName;
     }
   });
+  // console.log(found);
   if (found.length === 0) {
     clearGridContent();
     nothingFound.classList.add("active");

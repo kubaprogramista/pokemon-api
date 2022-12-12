@@ -10,10 +10,11 @@ let inputData = "";
 //total pokemons: 898
 //total images: 809
 
-const numberOfPokemons = 809; //151
+const numberOfPokemons = 151;
 
 let count = 0;
 let isLoaded = false;
+let currentDivs = [];
 
 function renderPokemon(data) {
   ++count;
@@ -50,6 +51,9 @@ function renderPokemon(data) {
   });
   newPokemon.style.background = `${typeColor}`;
   gridContainer.appendChild(newPokemon);
+  if (currentDivs.length + 1 <= numberOfPokemons) {
+    currentDivs.push(newPokemon);
+  }
   if (count === numberOfPokemons) {
     isLoaded = true;
   }
@@ -57,9 +61,8 @@ function renderPokemon(data) {
 
 searchBarInput.addEventListener("input", (e) => {
   if (isLoaded) {
-    const allDivs = document.querySelectorAll("#pokemon");
     inputData = e.target.value;
-    searchHandler(allDivs);
+    searchHandler(currentDivs);
   }
 });
 
