@@ -30,8 +30,6 @@ function renderPokemon(data) {
     id = `0${id}`;
   }
 
-  //BACKUP IMAGES: https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${id}.png
-
   let imageLink = `https://pokedex.hybridshivam.com/assets/thumbnails-compressed/${id}.png`;
   let types = data.types;
   let typeName = types[0].type.name;
