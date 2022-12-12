@@ -1,3 +1,4 @@
+const allContent = document.querySelector("body");
 const gridContainer = document.querySelector(".grid-content");
 const pokemonWindow = document.querySelector(".pokemon-window");
 const pokemonImage = document.querySelector(".image");
@@ -5,19 +6,20 @@ const goBackButton = document.querySelector(".go-back-button");
 const searchContainer = document.querySelector(".search-container");
 const searchBarInput = document.querySelector(".search");
 const nothingFound = document.querySelector(".nothing-found");
-let inputData = "";
 
+allContent.style.filter = "opacity(0%)";
+
+let inputData = "";
 //total pokemons: 898
 //total images: 809
 
-const numberOfPokemons = 151;
+const numberOfPokemons = 809; //151
 
-searchBarInput.addEventListener("input", (e) => {
-  inputData = e.target.value;
-  searchHandler();
-});
+let count = 0;
+let isLoaded = false;
 
 function renderPokemon(data) {
+  ++count;
   let name = capitalizeFirstLetter(data.species.name);
   let id = 0;
 
@@ -51,7 +53,19 @@ function renderPokemon(data) {
   });
   newPokemon.style.background = `${typeColor}`;
   gridContainer.appendChild(newPokemon);
+  if (count === numberOfPokemons) {
+    isLoaded = true;
+    allContent.style.filter = "opacity(100%)";
+  }
 }
+
+searchBarInput.addEventListener("input", (e) => {
+  if (isLoaded) {
+    const allDivs = document.querySelectorAll("#pokemon");
+    inputData = e.target.value;
+    searchHandler(allDivs);
+  }
+});
 
 goBackButton.addEventListener("click", () => {
   mainPageStyleHandler();

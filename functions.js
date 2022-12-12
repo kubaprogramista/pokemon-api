@@ -16,11 +16,11 @@ function fetchData(url) {
     });
 }
 
-function searchHandler() {
-  let renderedDivs = document.querySelectorAll(`#pokemon`);
-  renderedDivs = [...renderedDivs];
+function searchHandler(divs) {
+  let renderedDivs = [...divs];
   const found = renderedDivs.filter((div) => {
     if (div.className.includes(inputData)) {
+      console.log(inputData);
       let divID = div.classList[0];
       let divName = div.classList[1];
       clearGridContent();
