@@ -39,15 +39,15 @@ function renderPokemon(data) {
   newPokemon.id = `pokemon`;
   newPokemon.className = ` ${data.id} ${name.toLowerCase()}`;
   newPokemon.innerHTML = `
-    <p>#${id}</p>
-    <p>${name}</p>
-    <img src="${imageLink}" alt="">
+    <p class="${data.id}">#${id}</p>
+    <p class="${data.id}">${name}</p>
+    <img src="${imageLink}" alt="" class="${data.id}">
     `;
-  newPokemon.addEventListener("click", (e) => {
-    chosenPokemonHandler(e);
-    document.querySelector("header").style.background = `${typeColor}`;
-  });
-  renderGridPokemonTypes(data.types, newPokemon);
+  // newPokemon.addEventListener("click", (e) => {
+  //   chosenPokemonHandler(e);
+  //   document.querySelector("header").style.background = `${typeColor}`;
+  // });
+  renderGridPokemonTypes(data.types, newPokemon, data.id);
 
   gridContainer.appendChild(newPokemon);
   if (currentDivs.length + 1 <= numberOfPokemons) {
@@ -58,17 +58,25 @@ function renderPokemon(data) {
   }
 }
 
-function renderGridPokemonTypes(types, container) {
+gridContainer.addEventListener("click", (e) => {
+  if (e.target.tagName.toLowerCase() != "section") {
+    let id = e.target.classList[0];
+    pokemonWindowHandler(id);
+    pokemonWindowStyleHandler();
+  }
+});
+
+function renderGridPokemonTypes(types, container, id) {
   let count = 0;
   let typeColor2 = "";
   const gridTypeContainer = document.createElement("div");
-  gridTypeContainer.className = `grid-pokemon-type-container`;
+  gridTypeContainer.className = `${id} grid-pokemon-type-container`;
   types.forEach((type) => {
     count++;
     let typeName = type.type.name;
     const newTypeBall = document.createElement("div");
-    newTypeBall.className = `grid-pokemon-type`;
-    newTypeBall.innerHTML = `<img src="png/type-icons/${type.type.name}.png" alt="">`;
+    newTypeBall.className = `${id} grid-pokemon-type`;
+    newTypeBall.innerHTML = `<img src="png/type-icons/${type.type.name}.png" alt="" class="${id}">`;
     newTypeBall.style.background = `${typeColors[typeName]}`;
     newTypeBall.style.boxShadow = `0px 0px 15px ${typeColors[typeName]}`;
 
