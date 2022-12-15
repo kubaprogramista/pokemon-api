@@ -45,7 +45,7 @@ function clearGridContent() {
 function mainPageStyleHandler() {
   document.querySelector("header").style.background = `transparent`;
   document.body.style.overflowY = `hidden`;
-  goBackButton.style.transform = `translateY(-100px)`;
+  goBackButton.style.transform = `translateY(-500px)`;
   setTimeout(() => {
     gridContainer.style.transform = `scale(100%)`;
     gridContainer.style.filter = `opacity(100%)`;
@@ -54,7 +54,7 @@ function mainPageStyleHandler() {
     searchContainer.style.transform = `scale(100%)`;
   }, 400);
   pokemonWindow.style.transform = `translateY(-1000px)`;
-  pokemonImage.style.transform = `translateY(-200px)`;
+  pokemonImage.style.transform = `translateY(-500px)`;
 }
 
 function pokemonWindowStyleHandler() {
@@ -67,7 +67,7 @@ function pokemonWindowStyleHandler() {
   setTimeout(() => {
     pokemonImage.style.transform = `translateY(0px)`;
     goBackButton.style.transform = `translateY(0px)`;
-  }, 400);
+  }, 700);
   window.scrollTo(0, 0);
 }
 
