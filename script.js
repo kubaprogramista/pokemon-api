@@ -83,10 +83,10 @@ searchBarInput.addEventListener("input", (e) => {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     if (isLoaded) {
-      inputData = e.target.value;
+      inputData = e.target.value.toLowerCase();
       searchHandler(currentDivs);
     }
-  }, 300);
+  }, 500);
 });
 
 goBackButton.addEventListener("click", () => {
