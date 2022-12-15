@@ -78,11 +78,15 @@ function renderGridPokemonTypes(types, container) {
   container.appendChild(gridTypeContainer);
 }
 
+let timeout = null;
 searchBarInput.addEventListener("input", (e) => {
-  if (isLoaded) {
-    inputData = e.target.value;
-    searchHandler(currentDivs);
-  }
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    if (isLoaded) {
+      inputData = e.target.value;
+      searchHandler(currentDivs);
+    }
+  }, 300);
 });
 
 goBackButton.addEventListener("click", () => {
