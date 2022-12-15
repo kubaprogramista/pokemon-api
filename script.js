@@ -7,8 +7,9 @@ const searchBarInput = document.querySelector(".search");
 const nothingFound = document.querySelector(".nothing-found");
 
 let inputData = "";
-//total pokemons: 898
-//total images: 809
+// INFO FOR LATER CHANGES:
+// total pokemons: 898
+// total images: 809
 
 const numberOfPokemons = 151;
 
@@ -43,10 +44,6 @@ function renderPokemon(data) {
     <p class="${data.id}">${name}</p>
     <img src="${imageLink}" alt="" class="${data.id}">
     `;
-  // newPokemon.addEventListener("click", (e) => {
-  //   chosenPokemonHandler(e);
-  //   document.querySelector("header").style.background = `${typeColor}`;
-  // });
   renderGridPokemonTypes(data.types, newPokemon, data.id);
 
   gridContainer.appendChild(newPokemon);
@@ -89,6 +86,7 @@ function renderGridPokemonTypes(types, container, id) {
 let timeout = null;
 searchBarInput.addEventListener("input", (e) => {
   clearTimeout(timeout);
+  window.scrollTo(0, 0);
   timeout = setTimeout(() => {
     if (isLoaded) {
       inputData = e.target.value.toLowerCase();

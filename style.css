@@ -39,14 +39,14 @@ select {
 
 body {
   background: rgb(47, 47, 47);
-  overflow-x: hidden;
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
   transition: filter 0.3s ease-in-out;
 }
 
 header {
-  background-color: rgba(47, 47, 47);
+  background: transparent;
   position: relative;
   height: 7vh;
   width: 100vw;
