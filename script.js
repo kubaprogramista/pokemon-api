@@ -11,7 +11,7 @@ let inputData = "";
 // total pokemons: 898
 // total images: 809
 
-const numberOfPokemons = 151;
+const numberOfPokemons = 809; //151
 
 let count = 0;
 let isLoaded = false;
