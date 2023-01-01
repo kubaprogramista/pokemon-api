@@ -204,6 +204,10 @@ main {
     justify-content: flex-start;
   }
 
+  .search:focus {
+    outline: none;
+  }
+
   .grid-content {
     justify-content: center;
   }
