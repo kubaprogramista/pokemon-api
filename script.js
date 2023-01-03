@@ -12,7 +12,7 @@ let inputData = "";
 // total images: 809
 // first generation: 151
 
-const numberOfPokemons = 809;
+const numberOfPokemons = 450;
 
 let count = 0;
 let isLoaded = false;
