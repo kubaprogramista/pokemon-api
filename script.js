@@ -7,7 +7,7 @@ const searchBarInput = document.querySelector(".search");
 const nothingFound = document.querySelector(".nothing-found");
 
 let inputData = "";
-// INFO FOR LATER CHANGES:
+// IMPORTANT INFO:
 // total pokemons: 898
 // total images: 809
 // first generation: 151
